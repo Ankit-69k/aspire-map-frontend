@@ -9,7 +9,13 @@ import { toast } from "sonner";
 import { Loader2, Plus, X } from "lucide-react";
 import { Badge } from "../ui/badge";
 
-function ProfileCreation({ studentId }: { studentId: string | null }) {
+function ProfileCreation({
+  studentId,
+  setHasProfile,
+}: {
+  studentId: string | null;
+  setHasProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [formData, setFormData] = useState({
     education: [] as string[],
     skills: [] as string[],
@@ -105,7 +111,7 @@ function ProfileCreation({ studentId }: { studentId: string | null }) {
         console.log("Profile created:", newProfile);
 
         toast.success("Profile created successfully!");
-        // Optionally, redirect or update UI
+        setHasProfile(true);
       } else {
         throw new Error("Failed to create profile");
       }
@@ -134,13 +140,13 @@ function ProfileCreation({ studentId }: { studentId: string | null }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <Card>
         <CardHeader>
           <CardTitle>Create Your Profile</CardTitle>
           <CardDescription>Upload your resume for automatic extraction or fill out the form manually</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 w-full">
           {/* Resume Upload */}
           <div className="space-y-2">
             <Label>Upload Resume (Optional)</Label>
