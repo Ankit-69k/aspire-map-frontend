@@ -17,28 +17,46 @@ export default function AuthPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    console.log({ name, email, password });
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/student`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
+    try {
+      const url = isRegister
+        ? `${process.env.NEXT_PUBLIC_API_URL}/student`
+        : `${process.env.NEXT_PUBLIC_API_URL}/student/login`;
 
-    const data = await response.json();
+      const body = isRegister ? { name, email, password } : { email, password };
 
-    if (!response.ok) {
-      console.error("Failed to register", data.message);
-      toast.error("Registration failed. Please try again.");
-    } else {
-      toast.success("Registration successful! Please log in.");
-      console.log("Registration successful!", data);
-      router.push("/dashboard?profileId=" + data.data.id);
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Auth failed:", data.message);
+        toast.error(data.message || "Something went wrong");
+        return;
+      }
+
+      if (isRegister) {
+        toast.success("Registration successful! Please log in.");
+        setIsRegister(false);
+      } else {
+        toast.success("Login successful!");
+        router.push("/dashboard?studentId=" + data.data.id);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Server error. Try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 

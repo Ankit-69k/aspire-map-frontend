@@ -29,7 +29,7 @@ export function ProfileSection() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold font-[var(--font-playfair)]">Your Profile</h1>
+        <h1 className="text-3xl font-bold ">Your Profile</h1>
         <Button variant="outline" className="gap-2 bg-transparent">
           <Edit className="h-4 w-4" />
           Edit Profile

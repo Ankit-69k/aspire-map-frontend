@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react";
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={cn(`font-sans `, inter.className)}>
-        <Suspense fallback={<>loading...</>}>{children}</Suspense>
+        <Suspense fallback={<>loading...</>}>
+          {children}
+          <Toaster />
+        </Suspense>
       </body>
     </html>
   );
