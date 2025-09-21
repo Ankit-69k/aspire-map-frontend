@@ -36,16 +36,16 @@ export default function Home() {
       <header className="border-b border-border">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <motion.h1
-            className="text-2xl font-bold text-primary font-[var(--font-playfair)]"
+            className="text-2xl font-bold text-primary "
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
             CareerPath
           </motion.h1>
-          <Link href="/dashboard">
+          <Link href="/auth">
             <Button className="bg-primary hover:bg-primary/90">
-              Go to Dashboard
+              Signup / Login
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
@@ -56,7 +56,7 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
           <motion.h2
-            className="text-5xl md:text-6xl font-bold mb-6 text-balance font-[var(--font-playfair)]"
+            className="text-5xl md:text-6xl font-bold mb-6 text-balance"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
