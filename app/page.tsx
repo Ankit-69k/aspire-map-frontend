@@ -96,9 +96,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h3 className="text-3xl md:text-4xl font-bold mb-4 font-[var(--font-playfair)]">
-              Everything You Need to Succeed
-            </h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 ">Everything You Need to Succeed</h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
               Our comprehensive platform provides all the tools and guidance you need to advance your career.
             </p>
@@ -137,9 +135,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 font-[var(--font-playfair)]">
-              Ready to Transform Your Career?
-            </h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Career?</h3>
             <p className="text-lg text-muted-foreground mb-8 text-pretty">
               Join thousands of professionals who have already started their journey to career success.
             </p>
