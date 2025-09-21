@@ -41,7 +41,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            CareerPath
+            AspireMap
           </motion.h1>
           <Link href="/auth">
             <Button className="bg-primary hover:bg-primary/90">
@@ -156,7 +156,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-border py-8 px-4">
         <div className="container mx-auto text-center">
-          <p className="text-muted-foreground">© 2024 CareerPath. Empowering careers through intelligent guidance.</p>
+          <p className="text-muted-foreground">© 2024 AspireMap. Empowering careers through intelligent guidance.</p>
         </div>
       </footer>
     </div>

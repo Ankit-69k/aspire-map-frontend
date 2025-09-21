@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CareerPath - Your Personal Career Guidance Platform",
+  title: "AspireMap - Your Personal Career Guidance Platform",
   description: "Discover your career potential with personalized roadmaps, AI-powered guidance, and adaptive learning.",
   generator: "v0.app",
 };

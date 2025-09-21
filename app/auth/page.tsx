@@ -70,7 +70,7 @@ export default function AuthPage() {
           transition={{ duration: 0.6 }}
           className="max-w-md text-center space-y-6"
         >
-          <h1 className="text-4xl font-bold">Welcome to CareerPath</h1>
+          <h1 className="text-4xl font-bold">Welcome to AspireMap</h1>
           <p className="text-lg opacity-90">
             Shape your career journey with AI-powered guidance, adaptive learning roadmaps, and smart recommendations.
           </p>
