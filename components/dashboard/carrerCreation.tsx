@@ -90,7 +90,7 @@ function CarrerCreation({
 
   useEffect(() => {
     fetchCareerRecommendations();
-  }, [studentId]);
+  }, []);
 
   if (loading && careerRecommendations.length === 0) {
     return <p>Loading career recommendations...</p>;

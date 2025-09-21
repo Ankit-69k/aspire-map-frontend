@@ -6,55 +6,17 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Circle, Clock, BookOpen, Award, ArrowRight, Play } from "lucide-react";
 
-export function LearningRoadmap() {
-  const roadmapItems = [
-    {
-      id: 1,
-      title: "JavaScript Fundamentals",
-      description: "Master the core concepts of JavaScript programming",
-      status: "completed",
-      progress: 100,
-      duration: "4 weeks",
-      skills: ["Variables", "Functions", "Objects", "Arrays"],
-    },
-    {
-      id: 2,
-      title: "React Development",
-      description: "Build modern web applications with React",
-      status: "in-progress",
-      progress: 65,
-      duration: "6 weeks",
-      skills: ["Components", "Hooks", "State Management", "Routing"],
-    },
-    {
-      id: 3,
-      title: "Node.js Backend",
-      description: "Create server-side applications with Node.js",
-      status: "upcoming",
-      progress: 0,
-      duration: "5 weeks",
-      skills: ["Express.js", "APIs", "Database Integration", "Authentication"],
-    },
-    {
-      id: 4,
-      title: "Database Design",
-      description: "Learn SQL and database optimization techniques",
-      status: "upcoming",
-      progress: 0,
-      duration: "4 weeks",
-      skills: ["SQL Queries", "Database Design", "Optimization", "NoSQL"],
-    },
-    {
-      id: 5,
-      title: "DevOps Basics",
-      description: "Understand deployment and CI/CD processes",
-      status: "locked",
-      progress: 0,
-      duration: "3 weeks",
-      skills: ["Docker", "AWS", "CI/CD", "Monitoring"],
-    },
-  ];
+interface RoadmapItem {
+  id: number;
+  title: string;
+  description: string;
+  status: "completed" | "in-progress" | "upcoming" | "locked";
+  progress: number;
+  duration: string;
+  skills: string[];
+}
 
+export function LearningRoadmap({ items }: { items: RoadmapItem[] }) {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
@@ -62,7 +24,7 @@ export function LearningRoadmap() {
       case "in-progress":
         return <Play className="h-5 w-5 text-blue-500" />;
       case "upcoming":
-        return <Circle className="h-5 w-5 text-muted-foreground" />;
+        return <Circle className="h-5 w-5 text-yellow-500" />;
       case "locked":
         return <Circle className="h-5 w-5 text-muted-foreground opacity-50" />;
       default:
@@ -85,16 +47,24 @@ export function LearningRoadmap() {
     }
   };
 
+  const completedCount = items.filter((i) => i.status === "completed").length;
+  const inProgressCount = items.filter((i) => i.status === "in-progress").length;
+  const upcomingCount = items.filter((i) => i.status === "upcoming").length;
+  const lockedCount = items.filter((i) => i.status === "locked").length;
+  const overallProgress = Math.round(
+    (items.reduce((acc, i) => acc + (i.status === "completed" ? 100 : i.progress || 0), 0) / (items.length * 100)) * 100
+  );
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold font-[var(--font-playfair)]">Learning Roadmap</h1>
-          <p className="text-muted-foreground mt-2">Your personalized path to becoming a Senior Full-Stack Developer</p>
+          <h1 className="text-3xl font-bold">Learning Roadmap</h1>
+          <p className="text-muted-foreground mt-2">Your personalized learning journey</p>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold text-primary">65%</div>
+          <div className="text-2xl font-bold text-primary">{overallProgress}%</div>
           <div className="text-sm text-muted-foreground">Overall Progress</div>
         </div>
       </div>
@@ -111,24 +81,26 @@ export function LearningRoadmap() {
           <div className="space-y-4">
             <div className="flex justify-between text-sm">
               <span>Overall Completion</span>
-              <span>2 of 5 modules completed</span>
+              <span>
+                {completedCount} of {items.length} modules completed
+              </span>
             </div>
-            <Progress value={40} className="h-3" />
+            <Progress value={overallProgress} className="h-3" />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-500">1</div>
+                <div className="text-2xl font-bold text-green-500">{completedCount}</div>
                 <div className="text-xs text-muted-foreground">Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-500">1</div>
+                <div className="text-2xl font-bold text-blue-500">{inProgressCount}</div>
                 <div className="text-xs text-muted-foreground">In Progress</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-yellow-500">2</div>
+                <div className="text-2xl font-bold text-yellow-500">{upcomingCount}</div>
                 <div className="text-xs text-muted-foreground">Upcoming</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-muted-foreground">1</div>
+                <div className="text-2xl font-bold text-muted-foreground">{lockedCount}</div>
                 <div className="text-xs text-muted-foreground">Locked</div>
               </div>
             </div>
@@ -138,7 +110,7 @@ export function LearningRoadmap() {
 
       {/* Roadmap Items */}
       <div className="space-y-4">
-        {roadmapItems.map((item, index) => (
+        {items.map((item) => (
           <Card key={item.id} className={`${item.status === "locked" ? "opacity-60" : ""}`}>
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
